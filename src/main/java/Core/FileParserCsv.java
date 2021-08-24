@@ -52,9 +52,10 @@ public class FileParserCsv {
 
 
         }catch (IOException e){
-            System.out.println("ds");
+            System.out.println("Ошибка ввода");
+            e.printStackTrace();
         } catch (CsvValidationException e){
-            System.out.println("В душе не шарю что это за выброс");
+            e.printStackTrace();
         }
 
         return listDragon;
