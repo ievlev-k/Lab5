@@ -98,6 +98,11 @@ public class Commander {
 
     }
 
+    /**
+     * чтобы классифицировать команду пользователя и попытаться запустить ее.
+     * @param userCommand команда пользователя
+     * @return  значение true, если команда не выполняется. В противном случае значение false, если команда является исполняемой
+     */
 
     private boolean categorizeCommand(String[] userCommand){
         switch (userCommand[0]){

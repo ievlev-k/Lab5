@@ -18,6 +18,12 @@ import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvMalformedLineException;
+
+/**
+ * этот класс используется для анализа файла CSV и сохранения данных в коллекцию
+ */
+
+
 import com.opencsv.exceptions.CsvValidationException;
 public class FileParserCsv {
     public ArrayDeque<Dragon> parse(String ImputFileName) throws IOException {
@@ -52,7 +58,7 @@ public class FileParserCsv {
 
 
         }catch (IOException e){
-            System.out.println("Ошибка ввода");
+            System.out.println("Этот файл не правильный или возможно это вообще не файл");
             e.printStackTrace();
         } catch (CsvValidationException e){
             e.printStackTrace();

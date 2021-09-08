@@ -2,6 +2,12 @@ package Core;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+
+/**
+ * Этот класс используется для проверки правильности ввода пользователя
+ */
+
+
 public class InputChecker {
     public boolean floatChecker(String s ,float min, float max, boolean canEmpty){
         try{
