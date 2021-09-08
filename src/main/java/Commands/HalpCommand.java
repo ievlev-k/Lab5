@@ -18,7 +18,7 @@ public class HalpCommand extends AbstractCommand {
         System.out.println("history                             - вывести последние 6 команд (без их аргументов)");
         System.out.println("remove_any_by_character character   - удалить из коллекции один элемент, значение поля character которого эквивалентно заданному");
         System.out.println("min_by_weight                       - вывести любой объект из коллекции, значение поля weight которого является минимальным");
-        System.out.println("print_unique_weight                 - вывести элементы, значение поля character которых больше заданного");
+        System.out.println("print_unique_weight                 - вывести уникальные значения поля weight всех элементов в коллекции");
 
 
         return true;

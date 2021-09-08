@@ -60,8 +60,10 @@ public class FileParserCsv {
         }catch (IOException e){
             System.out.println("Этот файл не правильный или возможно это вообще не файл");
             e.printStackTrace();
+            System.exit(-1);
         } catch (CsvValidationException e){
             e.printStackTrace();
+            System.exit(-1);
         }
 
         return listDragon;

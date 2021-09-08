@@ -10,6 +10,7 @@ public class RemoveHeadCommand extends AbstractCommand{
 
     @Override
     public boolean execute() {
+        System.out.println("Был удален вот этот объект. Он являлся началом коллекции");
         return collectionManager.removeHead();
     }
 }

@@ -119,6 +119,7 @@ public class CollectionManager {
         for (Dragon dragon: listDragon){
             if (dragon.getCharacter() == character){
                 listDragon.remove(dragon);
+                System.out.println("Был удален dragon c character:" + character);
                 return true;
             }
         }

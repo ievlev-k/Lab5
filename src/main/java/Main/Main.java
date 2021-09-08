@@ -21,6 +21,7 @@ public class Main {
         }
         if (fileName.matches("[/\\\\]dev.*")) {
             System.out.println("Не могу исполнить данный файл");
+            System.exit(-1);
         }else{
             collectionManager.reedInputFromCsvFile(fileName);
         }

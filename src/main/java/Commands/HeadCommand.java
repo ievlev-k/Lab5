@@ -12,6 +12,7 @@ public class HeadCommand extends AbstractCommand{
 
     @Override
     public boolean execute() {
+        System.out.println("Этот элемент является началом коллекции");
         return collectionManager.head();
     }
 }

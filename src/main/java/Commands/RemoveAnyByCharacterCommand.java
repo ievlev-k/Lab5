@@ -13,6 +13,7 @@ public class RemoveAnyByCharacterCommand extends AbstractCommand{
     public boolean execute(String argument) {
         try {
             DragonCharacter character = DragonCharacter.valueOf(argument);
+
             return collectionManager.removeAnyByCharacter(character);
         }catch (IllegalArgumentException e){
             System.out.println("Неверный character! Такого character нет");

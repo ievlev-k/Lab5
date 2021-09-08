@@ -12,7 +12,7 @@ public class UpdateIdCommand extends AbstractCommand{
 
     @Override
     public boolean execute(String argument) {
-        if(inputChecker.intChecker(argument,0, Integer.MAX_VALUE, false)){
+        if(inputChecker.longChecker(argument,0, Long.MAX_VALUE, false)){
             int id = Integer.parseInt(argument);
             if (collectionManager.removeByID(id)){
                 System.out.println("Такого Id нет");
