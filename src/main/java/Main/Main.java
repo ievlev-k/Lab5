@@ -8,18 +8,24 @@ import java.nio.*;
 import java.util.Scanner;
 
 public class Main {
-    static final String FILE_PATH = "src/main/java/File/";
+//    static final String FILE_PATH = "src/main/java/File/";
     static String fileName;
 
     public static void main(String[] args) {
+        CollectionManager collectionManager = new CollectionManager();
         try {
             fileName = args[0];
         }catch (ArrayIndexOutOfBoundsException e){
             System.out.println("Вставте ввод файла с помощью аргумента командной строки");
             System.exit(-1);
         }
-        CollectionManager collectionManager = new CollectionManager();
-        collectionManager.reedInputFromCsvFile(FILE_PATH + fileName);
+        if (fileName.matches("[/\\\\]dev.*")) {
+            System.out.println("Не могу исполнить данный файл");
+        }else{
+            collectionManager.reedInputFromCsvFile(fileName);
+        }
+
+
         InputChecker inputChecker = new InputChecker();
         CommandAsker commandAsker = new CommandAsker(inputChecker);
         CommandManager commandManager = new CommandManager(
@@ -38,7 +44,7 @@ public class Main {
                 new ClearCommand(collectionManager),
                 new ExitCommand()
         );
-        Commander commander = new Commander(new Scanner(System.in),commandManager, FILE_PATH + fileName);
+        Commander commander = new Commander(new Scanner(System.in),commandManager, fileName);
         System.out.println("Программа готова начать. Введите команду.");
 
 

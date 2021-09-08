@@ -1,10 +1,7 @@
 package Core;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 import java.io.File;
 
 public class Commander {
@@ -13,7 +10,7 @@ public class Commander {
     private final CommandManager commandManager;
     private final String outputFile;
 
-    static final String FILE_PATH = "src/main/java/File/";
+//    static final String FILE_PATH = "src/main/java/File/";
     private final Deque<String> historyRecorder = new ArrayDeque<>(8);
     public Commander(Scanner sc, CommandManager cm, String oFile){
         this.userScanner = sc;
@@ -59,41 +56,45 @@ public class Commander {
     }
 
     private boolean scriptMode(String fileName){
-        System.out.println("Выполняется файл " + fileName  );
-        if (inStack.get(fileName) != null){
-            if (inStack.get(fileName)){
-                System.out.println("Чтобы избежать рекурсии, файл " + fileName + " не может быть выполнен ");
-                return false;
-            }
-        }
-        inStack.put(fileName, true);
-
-        File scriptFile =new File(FILE_PATH + fileName);
-        Scanner fileScanner;
-        try {
-            fileScanner = new Scanner(scriptFile);
-        }catch (FileNotFoundException fileNotFoundException){
-            System.out.println("Этого файла не существует!");
+        if (fileName.matches("[/\\\\]dev.*")) {
+            System.out.println("Не могу исполнить данный файл");
             return false;
         }
-
-        while (fileScanner.hasNextLine()){
-            String[] userCommand = fileScanner.nextLine().trim().split(" ");
-            if (userCommand.length > 2){
-                System.out.println("Неверная комманда! Комманда содержит 1 или 2 аргумента.");
-                continue;
+        else{System.out.println("Выполняется файл " + fileName  );
+            if (inStack.get(fileName) != null){
+                if (inStack.get(fileName)){
+                    System.out.println("Чтобы избежать рекурсии, файл " + fileName + " не может быть выполнен ");
+                    return false;
+                }
             }
-            if (categorizeCommand(userCommand)){
-                System.out.println("Комманда не выполнена");
-                continue;
+            inStack.put(fileName, true);
+
+            File scriptFile =new File(fileName);
+            Scanner fileScanner;
+            try {
+                fileScanner = new Scanner(scriptFile);
+            }catch (FileNotFoundException fileNotFoundException){
+                System.out.println("Этого файла не существует!");
+                return false;
             }
-            System.out.println("");
-            updateHistory(userCommand[0]);
 
-        }
+            while (fileScanner.hasNextLine()){
+                String[] userCommand = fileScanner.nextLine().trim().split(" ");
+                if (userCommand.length > 2){
+                    System.out.println("Неверная комманда! Комманда содержит 1 или 2 аргумента.");
+                    continue;
+                }
+                if (categorizeCommand(userCommand)){
+                    System.out.println("Комманда не выполнена");
+                    continue;
+                }
+                System.out.println("");
+                updateHistory(userCommand[0]);
+
+            }
 
 
-        return true;
+            return true;}
 
     }
 
@@ -101,42 +102,50 @@ public class Commander {
     private boolean categorizeCommand(String[] userCommand){
         switch (userCommand[0]){
             case "help":
+                System.out.println(userCommand[0] + ":");
                 if(userCommand.length == 1){
                     return !commandManager.help();
                 }
+                System.out.println("У этой команды нет аргуманта");
                 return true;
             case "execute_script":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length != 1) {
                     return !scriptMode(userCommand[1]);
                 }
-                System.out.println("Нет названия файла");
+                System.out.println("Нужен путь до файла, который будет без пробелов");
                 return true;
 
             case "info":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 1){
                     return !commandManager.info();
                 }
                 System.out.println("У этой команды нет аргумента");
                 return true;
             case "show":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 1){
                     return !commandManager.show();
                 }
                 System.out.println("У этой команды нет аргумента");
                 return true;
             case "add":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 1){
                     return !commandManager.add();
                 }
                 System.out.println("Для создания dragon нужно только написать 'add'");
                 return true;
             case "clear":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 1){
                     return !commandManager.clear();
                 }
                 System.out.println("У этой команды нет аргумента");
                 return true;
             case "update":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 2){
                     return !commandManager.update_id(userCommand[1]);
 
@@ -144,17 +153,20 @@ public class Commander {
                 System.out.println("Вставте команду и id");
                 return true;
             case "remove_by_id":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 2){
                     return !commandManager.remove_by_id(userCommand[1]);
                 }
                 System.out.println("Вставте команду и id");
             case "save":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 1){
                     return !commandManager.save(outputFile);
                 }
                 System.out.println("У этой команды нет аргумента");
                 return true;
             case "exit":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 1){
                     System.out.println("Работа программы завершена");
                     return !commandManager.exit();
@@ -162,18 +174,21 @@ public class Commander {
                 System.out.println("У этой команды нет аргумента");
                 return true;
             case "head":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 1){
                     return !commandManager.head();
                 }
                 System.out.println("У этой команды нет аргумента");
                 return true;
             case "remove_head":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 1){
                     return !commandManager.remove_head();
                 }
                 System.out.println("У этой команды нет аргумента");
                 return true;
             case "history":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 1){
                     if (historyRecorder.size() == 0) System.out.println("История пуста!");
                     for (String cm: historyRecorder){
@@ -184,6 +199,7 @@ public class Commander {
                 System.out.println("У этой команды нет аргумента");
                 return true;
             case "remove_any_by_character":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length!=1){
                     return !commandManager.remove_any_by_character(userCommand[1]);
                 }
@@ -191,6 +207,7 @@ public class Commander {
                 return true;
 
             case "min_by_weight":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 1){
                     return !commandManager.min_by_weight();
                 }
@@ -198,6 +215,7 @@ public class Commander {
                 return true;
 
             case "print_unique_weight":
+                System.out.println(userCommand[0] + ":");
                 if (userCommand.length == 1){
                     return !commandManager.print_unique_weight();
                 }
@@ -207,8 +225,13 @@ public class Commander {
 
 
             default:
+                System.out.println(String.join(", ", userCommand));
+
                 System.out.println("Нет введненной команды");
                 return true;
         }
     }
+
+
+
 }
