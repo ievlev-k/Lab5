@@ -1,5 +1,7 @@
 package Core;
+
 import Date.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -11,10 +13,11 @@ public class CommandAsker {
     private static final Scanner scanner = new Scanner(System.in);
     private final InputChecker inputChecker;
 
-    public CommandAsker(InputChecker ic){
+    public CommandAsker(InputChecker ic) {
         this.inputChecker = ic;
     }
-    public Dragon createDragon(){
+
+    public Dragon createDragon() {
         Dragon newDragon = new Dragon();
         System.out.println("Созвдаем Dragon");
         newDragon.setId(idAsker());
@@ -29,34 +32,34 @@ public class CommandAsker {
         return newDragon;
     }
 
-    public long idAsker(){
+    public long idAsker() {
         System.out.println("Id генерируется само.");
         long newID = new Random().nextLong();
-        if(CollectionManager.IDChecker.contains(newID) || newID < 0){
+        if (CollectionManager.IDChecker.contains(newID) || newID < 0) {
             return idAsker();
-        }
-        else{
+        } else {
             CollectionManager.IDChecker.add(newID);
             System.out.println("ID = " + newID + " успешно сгенерировался");
             return newID;
         }
     }
 
-    public String nameAsker(){
+    public String nameAsker() {
         while (true) {
             System.out.println("Вставте имя: ");
             String name = scanner.nextLine().trim();
-            if(name.equals("")){
+            if (name.equals("")) {
                 System.out.println("Вставсте имя еще раз. Name не может быть пустым.");
+            } else {
+                return name;
             }
-            else {return name;}
 
         }
 
 
     }
 
-    public Coordinates coordinatesAsker(){
+    public Coordinates coordinatesAsker() {
         System.out.println("Ввод координат: ");
         System.out.println("Введите X: ");
         long X = longAsker(Long.MIN_VALUE, Long.MAX_VALUE, false);
@@ -65,39 +68,38 @@ public class CommandAsker {
         return new Coordinates(X, Y);
     }
 
-    public LocalDateTime dateAsker(){
+    public LocalDateTime dateAsker() {
         return java.time.LocalDateTime.now();
     }
 
-    public Integer ageAsker(){
+    public Integer ageAsker() {
         System.out.println("Введите age: ");
         return intAsker(0, Integer.MAX_VALUE, false);
     }
 
-    public String descriptionAsker(){
+    public String descriptionAsker() {
         System.out.println("Введите discription: ");
         return scanner.nextLine();
     }
 
-    public int weightAsker(){
+    public int weightAsker() {
         System.out.println("Введите weight: ");
         return intAsker(0, Integer.MAX_VALUE, false);
     }
 
-    public DragonCharacter characterAsker(){
-        while (true){
+    public DragonCharacter characterAsker() {
+        while (true) {
             System.out.println("Введите character: ");
             String[] inputNumber = scanner.nextLine().trim().split(" ");
-            if(inputNumber.length != 1 ){
+            if (inputNumber.length != 1) {
                 System.out.println("Введите тоько 1 character");
-            }
-            else{
+            } else {
                 try {
                     return DragonCharacter.valueOf(inputNumber[0]);
-                }catch (IllegalArgumentException e){
+                } catch (IllegalArgumentException e) {
                     System.out.println("Неверный character! Такого character нет");
                     System.out.println("Введите характер из следующего списка");
-                    for (DragonCharacter dragonCharacter : DragonCharacter.values()){
+                    for (DragonCharacter dragonCharacter : DragonCharacter.values()) {
                         System.out.println(dragonCharacter);
                     }
                 }
@@ -105,7 +107,7 @@ public class CommandAsker {
         }
     }
 
-    public DragonCave dragonCaveAsker(){
+    public DragonCave dragonCaveAsker() {
         System.out.println("Введите depth: ");
         long depth = longAsker(Long.MIN_VALUE, Long.MAX_VALUE, true);
         System.out.println("Введите numberOfTreasures: ");
@@ -116,12 +118,12 @@ public class CommandAsker {
     }
 
 
-
-    public Integer intAsker(int min, int max, boolean canEmpty){
-        while (true){
+    public Integer intAsker(int min, int max, boolean canEmpty) {
+        while (true) {
             String[] inputNumber = scanner.nextLine().trim().split(" ");
-            if (canEmpty && inputNumber[0].equals("")){return null;}
-            else{
+            if (canEmpty && inputNumber[0].equals("")) {
+                return null;
+            } else {
                 if (inputNumber.length != 1) {
                     System.out.println("Введите ровно 1 integer число: ");
                 } else {
@@ -130,17 +132,16 @@ public class CommandAsker {
                 }
             }
         }
-}
+    }
 
 
-
-
-    public Long longAsker(long min, long max, boolean canEmpty){
-        while(true){
+    public Long longAsker(long min, long max, boolean canEmpty) {
+        while (true) {
 
             String[] inputNumber = scanner.nextLine().trim().split(" ");
-            if (canEmpty && inputNumber[0].equals("")){return null;}
-            else{
+            if (canEmpty && inputNumber[0].equals("")) {
+                return null;
+            } else {
                 if (inputNumber.length != 1) {
                     System.out.println("Введите ровно 1 long число: ");
                 } else {
@@ -153,15 +154,16 @@ public class CommandAsker {
     }
 
 
-    public Float floatAsker(float min, float max, boolean canEmpty){
-        while(true){
+    public Float floatAsker(float min, float max, boolean canEmpty) {
+        while (true) {
             String[] inputNumber = scanner.nextLine().trim().split(" ");
-            if (canEmpty && inputNumber == null){return null;}
-            if(inputNumber.length != 1 ){
-                System.out.println("Введите ровно 1 float число: ");
+            if (canEmpty && inputNumber == null) {
+                return null;
             }
-            else{
-                if(!inputChecker.floatChecker(inputNumber[0], min, max, canEmpty)) continue;
+            if (inputNumber.length != 1) {
+                System.out.println("Введите ровно 1 float число: ");
+            } else {
+                if (!inputChecker.floatChecker(inputNumber[0], min, max, canEmpty)) continue;
                 return Float.parseFloat(inputNumber[0]);
             }
         }

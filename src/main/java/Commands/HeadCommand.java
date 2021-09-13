@@ -4,9 +4,10 @@ import Core.CollectionManager;
 
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 
-public class HeadCommand extends AbstractCommand{
+public class HeadCommand extends AbstractCommand {
     private final CollectionManager collectionManager;
-    public HeadCommand(CollectionManager cm){
+
+    public HeadCommand(CollectionManager cm) {
         this.collectionManager = cm;
     }
 

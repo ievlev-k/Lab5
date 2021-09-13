@@ -4,9 +4,10 @@ import Core.CollectionManager;
 
 import javax.naming.Name;
 
-public class SaveCommand extends AbstractCommand{
+public class SaveCommand extends AbstractCommand {
     private final CollectionManager collectionManager;
-    public SaveCommand(CollectionManager cm){
+
+    public SaveCommand(CollectionManager cm) {
         this.collectionManager = cm;
     }
 

@@ -2,9 +2,10 @@ package Commands;
 
 import Core.CollectionManager;
 
-public class ClearCommand extends AbstractCommand{
+public class ClearCommand extends AbstractCommand {
     private final CollectionManager collectionManager;
-    public ClearCommand(CollectionManager cm){
+
+    public ClearCommand(CollectionManager cm) {
         this.collectionManager = cm;
     }
 

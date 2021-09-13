@@ -1,10 +1,13 @@
 package Commands;
+
 import Core.*;
-public class UpdateIdCommand extends AbstractCommand{
+
+public class UpdateIdCommand extends AbstractCommand {
     private final CollectionManager collectionManager;
     private final InputChecker inputChecker;
     private final CommandAsker commandAsker;
-    public UpdateIdCommand(CollectionManager cm, InputChecker ic, CommandAsker ca){
+
+    public UpdateIdCommand(CollectionManager cm, InputChecker ic, CommandAsker ca) {
         this.collectionManager = cm;
         this.inputChecker = ic;
         this.commandAsker = ca;
@@ -12,9 +15,9 @@ public class UpdateIdCommand extends AbstractCommand{
 
     @Override
     public boolean execute(String argument) {
-        if(inputChecker.longChecker(argument,0, Long.MAX_VALUE, false)){
+        if (inputChecker.longChecker(argument, 0, Long.MAX_VALUE, false)) {
             int id = Integer.parseInt(argument);
-            if (collectionManager.removeByID(id)){
+            if (collectionManager.removeByID(id)) {
                 System.out.println("Такого Id нет");
                 return false;
             }

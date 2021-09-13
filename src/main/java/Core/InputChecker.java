@@ -1,4 +1,5 @@
 package Core;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -9,37 +10,37 @@ import java.util.Locale;
 
 
 public class InputChecker {
-    public boolean floatChecker(String s ,float min, float max, boolean canEmpty){
-        try{
+    public boolean floatChecker(String s, float min, float max, boolean canEmpty) {
+        try {
             float x = Float.parseFloat(s);
-            if(x > min && x <= max) return true;
+            if (x > min && x <= max) return true;
             System.out.println("Введите числа в нужном диапазоне ");
             return false;
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Введите число типа float ");
             return false;
         }
     }
 
-    public boolean longChecker(String s ,long min, long max, boolean canEmpty){
-        try{
+    public boolean longChecker(String s, long min, long max, boolean canEmpty) {
+        try {
             long x = Long.parseLong(s);
-            if(x > min && x <= max) return true;
+            if (x > min && x <= max) return true;
             System.out.println("Введите числа в нужном диапазоне ");
             return false;
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Введите число типа long ");
             return false;
         }
     }
 
-    public boolean intChecker(String s ,int min, int max, boolean canEmpty){
-        try{
+    public boolean intChecker(String s, int min, int max, boolean canEmpty) {
+        try {
             int x = Integer.parseInt(s);
-            if(x > min && x <= max) return true;
+            if (x > min && x <= max) return true;
             System.out.println("Введите числа в нужном диапазоне ");
             return false;
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Введите число типа intaher ");
             return false;
         }

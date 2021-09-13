@@ -2,9 +2,10 @@ package Commands;
 
 import Core.CollectionManager;
 
-public class MinByWeightCommand extends AbstractCommand{
+public class MinByWeightCommand extends AbstractCommand {
     private final CollectionManager collectionManager;
-    public MinByWeightCommand(CollectionManager cm){
+
+    public MinByWeightCommand(CollectionManager cm) {
         this.collectionManager = cm;
     }
 

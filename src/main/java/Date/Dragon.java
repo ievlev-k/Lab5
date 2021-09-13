@@ -1,7 +1,9 @@
 package Date;
+
 import java.time.LocalDateTime;
 import java.util.Date;
-public class Dragon implements Comparable<Dragon>{
+
+public class Dragon implements Comparable<Dragon> {
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -20,7 +22,7 @@ public class Dragon implements Comparable<Dragon>{
         this.id = id;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -28,7 +30,7 @@ public class Dragon implements Comparable<Dragon>{
         this.name = name;
     }
 
-    public Coordinates getCoordinates(){
+    public Coordinates getCoordinates() {
         return coordinates;
     }
 
@@ -36,7 +38,7 @@ public class Dragon implements Comparable<Dragon>{
         this.coordinates = Coordinates;
     }
 
-    public java.time.LocalDateTime getCreationDate(){
+    public java.time.LocalDateTime getCreationDate() {
         return creationDate;
     }
 
@@ -44,16 +46,16 @@ public class Dragon implements Comparable<Dragon>{
         this.creationDate = creationDate;
     }
 
-    public Integer getAge(){
-        return  age;
+    public Integer getAge() {
+        return age;
     }
 
     public void setAge(Integer age) {
         this.age = age;
     }
 
-    public String getDescription(){
-        return  description;
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
@@ -76,16 +78,17 @@ public class Dragon implements Comparable<Dragon>{
         this.weight = weight;
     }
 
-    public DragonCharacter getCharacter(){
+    public DragonCharacter getCharacter() {
         return character;
     }
 
     public void setCharacter(DragonCharacter character) {
         this.character = character;
     }
+
     @Override
     public String toString() {
-        String info="";
+        String info = "";
         info += ("Name: " + name + '\n');
         info += ("ID: " + id + '\n');
         info += ("Coordinates: \n");
@@ -106,4 +109,5 @@ public class Dragon implements Comparable<Dragon>{
     public int compareTo(Dragon o) {
         return (int) weight - o.getWeight();
     }
+
 }

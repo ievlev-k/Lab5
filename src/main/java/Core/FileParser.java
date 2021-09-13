@@ -26,7 +26,7 @@ import org.xml.sax.SAXException;
 
 public class FileParser {
 
-    public PriorityQueue<Dragon> parse(String InputFileName) throws Exception{
+    public PriorityQueue<Dragon> parse(String InputFileName) throws Exception {
         File xmlFile = new File(InputFileName);
         PriorityQueue<Dragon> dragonList = new PriorityQueue<Dragon>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -41,13 +41,13 @@ public class FileParser {
             for (int i = 0; i < nodeList.getLength(); i++) {
                 dragonList.add(getDragon(nodeList.item(i)));
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Файл не устраивает>");
-        }catch (SAXException e){
+        } catch (SAXException e) {
             System.out.println("l");
-        }catch (ParserConfigurationException e){
+        } catch (ParserConfigurationException e) {
             System.out.println("Ошибка с конфигом");
-        }catch (NumberFormatException|NullPointerException exception){
+        } catch (NumberFormatException | NullPointerException exception) {
             System.out.println("Неверные данные в файле");
         }
 
@@ -55,19 +55,18 @@ public class FileParser {
         return dragonList;
     }
 
-    private Dragon getDragon(Node node){
+    private Dragon getDragon(Node node) {
         Dragon d = new Dragon();
-        if(node.getNodeType() == Node.ELEMENT_NODE){
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
             Element e = (Element) node;
 
 
             // set ID
             long newID = Integer.parseInt(getTagValue("ID", e));
 
-            if (CollectionManager.IDChecker.contains(newID)){
+            if (CollectionManager.IDChecker.contains(newID)) {
                 System.out.println("Не верное ID");
-            }
-            else{
+            } else {
                 CollectionManager.IDChecker.add(newID);
                 d.setId(newID);
             }
@@ -76,13 +75,13 @@ public class FileParser {
             d.setName(getTagValue("Name", e));
 
             // set Coordinaties
-            d.setCoordinates(new Coordinates(Long.parseLong(getTagValue("X", e)),Long.parseLong(getTagValue("Y",e))));
+            d.setCoordinates(new Coordinates(Long.parseLong(getTagValue("X", e)), Long.parseLong(getTagValue("Y", e))));
 
             // set LocalDareTime
 
             String dateString = getTagValue("CreationDate", e);
             DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
-            LocalDateTime dateTime = LocalDateTime.parse(dateString,formatter);
+            LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
             d.setCreationDate(dateTime);
 
             //set age
@@ -103,17 +102,16 @@ public class FileParser {
 
             //set cave
 
-            d.setCave(new DragonCave(Long.parseLong(getTagValue("Depth",e)), Float.parseFloat(getTagValue("NumberOfTreasures", e))));
+            d.setCave(new DragonCave(Long.parseLong(getTagValue("Depth", e)), Float.parseFloat(getTagValue("NumberOfTreasures", e))));
         }
         return d;
     }
 
-    private String getTagValue(String tag, Element element){
+    private String getTagValue(String tag, Element element) {
         NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
         Node node = (Node) nodeList.item(0);
         return node.getNodeValue();
     }
-
 
 
 }

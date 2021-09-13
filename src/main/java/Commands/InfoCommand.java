@@ -1,9 +1,11 @@
 package Commands;
+
 import Core.*;
+
 public class InfoCommand extends AbstractCommand {
     private final CollectionManager collectionManager;
 
-    public InfoCommand(CollectionManager cm){
+    public InfoCommand(CollectionManager cm) {
         this.collectionManager = cm;
     }
 
