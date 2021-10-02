@@ -1,6 +1,7 @@
 package Core;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.io.File;
 
@@ -57,7 +58,12 @@ public class Commander {
     }
 
     private boolean scriptMode(String fileName) {
-        if (fileName.matches("[/\\\\]dev.*")) {
+        try {
+
+
+        File file = new File(fileName);
+
+        if (file.toPath().toRealPath().toString().matches("[/\\\\]dev.*")) {
             System.out.println("Не могу исполнить данный файл");
             return false;
         } else {
@@ -67,7 +73,9 @@ public class Commander {
                     System.out.println("Чтобы избежать рекурсии, файл " + fileName + " не может быть выполнен ");
                     return false;
                 }
-            }
+            }}}catch (IOException e){
+            e.printStackTrace();
+        }
             inStack.put(fileName, true);
 
             File scriptFile = new File(fileName);
@@ -98,7 +106,7 @@ public class Commander {
             return true;
         }
 
-    }
+
 
     /**
      * чтобы классифицировать команду пользователя и попытаться запустить ее.
