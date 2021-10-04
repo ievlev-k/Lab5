@@ -26,8 +26,8 @@ import org.xml.sax.SAXException;
 
 public class FileParser {
 
-    public PriorityQueue<Dragon> parse(String InputFileName) throws Exception {
-        File xmlFile = new File(InputFileName);
+    public PriorityQueue<Dragon> parse(String inputFileName) throws Exception {
+        File xmlFile = new File(inputFileName);
         PriorityQueue<Dragon> dragonList = new PriorityQueue<Dragon>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;

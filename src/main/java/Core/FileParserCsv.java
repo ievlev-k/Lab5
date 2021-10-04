@@ -27,11 +27,11 @@ import com.opencsv.exceptions.CsvMalformedLineException;
 import com.opencsv.exceptions.CsvValidationException;
 
 public class FileParserCsv {
-    public ArrayDeque<Dragon> parse(String ImputFileName) throws IOException {
+    public ArrayDeque<Dragon> parse(String imputFileName) throws IOException {
         ArrayDeque<Dragon> listDragon = new ArrayDeque<>();
         String delimiter = ",";
         CSVParser parser = new CSVParserBuilder().withSeparator(delimiter.charAt(0)).build();
-        try (FileInputStream fileInputStream = new FileInputStream(ImputFileName);
+        try (FileInputStream fileInputStream = new FileInputStream(imputFileName);
              BufferedInputStream bis = new BufferedInputStream(fileInputStream);
              BufferedReader br = new BufferedReader(new InputStreamReader(bis, StandardCharsets.UTF_8));
              CSVReader reader = new CSVReaderBuilder(br).withCSVParser(parser).build()

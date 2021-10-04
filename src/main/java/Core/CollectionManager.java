@@ -14,23 +14,7 @@ import java.time.LocalDateTime;
 
 public class CollectionManager {
     public static HashSet<Long> IDChecker = new HashSet<>();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public final HashSet<Integer> WeightChecker = new HashSet<>();
+    public final HashSet<Integer> weightChecker = new HashSet<>();
     private final LocalDateTime creationDate = LocalDateTime.now();
     private final FileParser fileParser = new FileParser();
     private final FileParserCsv fileParserCsv = new FileParserCsv();
@@ -44,9 +28,9 @@ public class CollectionManager {
 //        }
 //    }
 
-    public void reedInputFromCsvFile(String InputFileName) {
+    public void reedInputFromCsvFile(String inputFileName) {
         try {
-            listDragon = fileParserCsv.parse(InputFileName);
+            listDragon = fileParserCsv.parse(inputFileName);
         } catch (Exception e) {
             System.out.println("Возникла непредвиденная ошибка");
         }
@@ -169,11 +153,11 @@ public class CollectionManager {
         if (listDragon.size() > 0) {
             System.out.print("Уникальные значения weight коллекции: ");
             for (Dragon dragon : listDragon) {
-                if (WeightChecker.contains(dragon.getWeight())) {
+                if (weightChecker.contains(dragon.getWeight())) {
                     continue;
                 } else {
                     System.out.print(dragon.getWeight() + " ");
-                    WeightChecker.add(dragon.getWeight());
+                    weightChecker.add(dragon.getWeight());
                 }
             }
             System.out.println("");
